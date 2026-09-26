@@ -1,0 +1,944 @@
+# Restaurant Website — Project Specification
+
+## 1. Project Overview
+
+Build a modern, responsive website for a family-owned restaurant.
+
+The website must be simple, elegant, fast, mobile-first, SEO-friendly, and easy for non-technical users (the restaurant owners) to maintain.
+
+The restaurant owners will need to update the menu approximately every 1–2 months. The most important requirement is therefore a **simple custom admin interface for managing the menu** without requiring technical knowledge.
+
+The developer has professional experience with **C#, ASP.NET Core, Entity Framework Core, Angular, SQL Server, and web development**, so the implementation should favor technologies and patterns that are familiar, maintainable, and appropriate for a small production website.
+
+---
+
+# 2. Technology Stack
+
+Use the following stack:
+
+### Backend
+
+* ASP.NET Core
+* C#
+* Entity Framework Core
+* SQLite
+* Razor Pages / Razor Views
+* ASP.NET Core Identity or another secure built-in authentication mechanism
+
+### Frontend
+
+* Razor-rendered HTML
+* HTML5
+* CSS
+* Bootstrap 5 where useful
+* Minimal JavaScript
+* Avoid unnecessary frontend frameworks
+
+### Database
+
+SQLite.
+
+The database should be stored as a local `.db` file on the server.
+
+Entity Framework Core should be used for:
+
+* migrations
+* database access
+* CRUD operations
+* relationships
+* validation
+
+---
+
+# 3. Architectural Goal
+
+Keep the application deliberately simple.
+
+Preferred architecture:
+
+```text
+                    ┌──────────────────────┐
+                    │      Customers       │
+                    │  Mobile / Desktop    │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │    ASP.NET Core      │
+                    │                      │
+                    │  Public Website      │
+                    │  Razor Pages         │
+                    │                      │
+                    │  Admin Area          │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │   Entity Framework   │
+                    │        Core          │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │       SQLite         │
+                    │    restaurant.db     │
+                    └──────────────────────┘
+```
+
+Do **not** introduce unnecessary infrastructure such as:
+
+* PostgreSQL
+* Redis
+* Docker unless deployment specifically requires it
+* a headless CMS
+* Directus
+* Sanity
+* Angular
+* React
+* Next.js
+* Astro
+* microservices
+
+The project should remain a single, self-contained ASP.NET Core application.
+
+---
+
+# 4. Public Website
+
+The public website should initially contain:
+
+## Home
+
+A visually attractive landing page containing:
+
+* restaurant name
+* short description
+* hero image
+* CTA to view the menu
+* CTA for reservations/contact
+* restaurant location
+* opening hours
+* optional social media links
+
+## Menu
+
+The menu is the most important page.
+
+It should dynamically load its contents from SQLite.
+
+Example:
+
+```text
+MENU
+
+ANTIPASTI
+
+Bruschette
+Tomato, basil and extra virgin olive oil
+€7.00
+
+Tagliere della Casa
+Selection of local cheeses and cured meats
+€18.00
+
+
+PRIMI
+
+Carbonara
+...
+€13.00
+
+Risotto
+...
+€15.00
+
+
+SECONDI
+
+...
+```
+
+Menu categories and dishes must come from the database.
+
+Do not hard-code menu items in Razor markup.
+
+---
+
+## About
+
+Restaurant story / information.
+
+---
+
+## Gallery
+
+Restaurant and food photographs.
+
+Images should be optimized for web usage.
+
+---
+
+## Contact
+
+Include:
+
+* address
+* telephone
+* email if applicable
+* opening hours
+* Google Maps integration/link
+* social media links
+
+---
+
+# 5. Menu Data Model
+
+Design the database so the menu can easily be changed without modifying application code.
+
+Recommended entities:
+
+## MenuCategory
+
+```text
+MenuCategory
+-------------
+Id
+Name
+Description
+SortOrder
+IsActive
+```
+
+## Dish
+
+```text
+Dish
+----
+Id
+MenuCategoryId
+Name
+Description
+Price
+SortOrder
+IsAvailable
+IsFeatured
+```
+
+Optional future fields:
+
+```text
+Allergens
+ImageUrl
+Notes
+```
+
+Use a relationship:
+
+```text
+MenuCategory 1 ──────── * Dish
+```
+
+Categories should be ordered using `SortOrder`.
+
+Dishes should also be ordered using `SortOrder`.
+
+---
+
+# 6. Menu Administration
+
+Create a protected `/admin` section.
+
+The restaurant owners should be able to log in and manage the menu without accessing technical parts of the application.
+
+Example:
+
+```text
+/admin/login
+
+/admin
+/admin/menu
+/admin/menu/categories
+/admin/menu/dishes
+```
+
+The admin dashboard should be intentionally simple.
+
+Example:
+
+```text
+MENU
+────────────────────────────
+
+ANTIPASTI
+[ Edit ] [ Add dish ]
+
+  Bruschette          €7
+  Tagliere            €18
+  Caprese             €9
+
+PRIMI
+[ Edit ] [ Add dish ]
+
+  Carbonara           €13
+  Risotto             €15
+
+[ + Add category ]
+```
+
+---
+
+# 7. Menu CRUD
+
+The admin must support:
+
+### Categories
+
+* create
+* edit
+* delete
+* activate/deactivate
+* reorder
+
+### Dishes
+
+* create
+* edit
+* delete
+* activate/deactivate
+* reorder
+* change price
+* change description
+* change allergens
+* optionally upload/change image
+
+The interface should not expose database IDs or other technical information.
+
+---
+
+# 8. Availability
+
+A dish should be possible to temporarily hide without deleting it.
+
+For example:
+
+```text
+Carbonara
+Available: YES
+```
+
+If ingredients are temporarily unavailable:
+
+```text
+Carbonara
+Available: NO
+```
+
+The dish should not appear on the public menu while unavailable.
+
+This allows the owners to keep the dish in the database.
+
+---
+
+# 9. Menu Versioning / Seasonal Menus
+
+The restaurant changes its menu every approximately 1–2 months.
+
+Design the application so that future menu versioning can be introduced without rewriting the database.
+
+Preferably support a menu entity such as:
+
+```text
+Menu
+----
+Id
+Name
+ValidFrom
+ValidUntil
+IsPublished
+```
+
+Possible examples:
+
+```text
+Summer Menu 2026
+01/06/2026 → 31/08/2026
+
+Autumn Menu 2026
+01/09/2026 → 30/11/2026
+
+Christmas Menu 2026
+01/12/2026 → 31/12/2026
+```
+
+The restaurant owners should eventually be able to prepare a new menu in advance.
+
+For example:
+
+```text
+CURRENT
+Autumn Menu
+
+NEXT
+Christmas Menu
+
+ARCHIVED
+Summer Menu
+Spring Menu
+```
+
+The public website should display the currently active/published menu.
+
+If full scheduled publishing is implemented, the application should automatically switch to the menu whose validity period matches the current date.
+
+Avoid overengineering this feature during the initial implementation if it significantly complicates the MVP.
+
+---
+
+# 10. Multilingual Support
+
+Design the application so multilingual menus can be supported later.
+
+Potential languages:
+
+* Italian
+* English
+* German
+* French
+
+Do not unnecessarily hard-code Italian text into the application.
+
+Static website labels should use ASP.NET Core localization where appropriate.
+
+For menu content, consider whether translations should eventually be stored in separate localized entities rather than duplicating entire dishes.
+
+The initial implementation may support Italian only if required, but the architecture should not make future translations difficult.
+
+---
+
+# 11. Authentication
+
+The `/admin` area must be protected.
+
+Unauthenticated users must not be able to access:
+
+```text
+/admin
+/admin/menu
+/admin/categories
+/admin/dishes
+```
+
+Use ASP.NET Core Identity or another secure ASP.NET Core authentication solution.
+
+The initial system only needs a small number of administrator accounts.
+
+Do not build a complex role/permission system unless required.
+
+---
+
+# 12. Security
+
+Follow standard ASP.NET Core security practices.
+
+Requirements:
+
+* authentication for admin pages
+* authorization checks
+* anti-forgery protection for forms
+* server-side validation
+* parameterized database queries through EF Core
+* secure password storage
+* secure cookie configuration
+* HTTPS in production
+* no sensitive information exposed to public users
+* no database access from the browser
+
+Never trust price, IDs, or other values supplied by the client.
+
+Validate all admin input server-side.
+
+---
+
+# 13. Pricing
+
+Prices should be stored as a suitable decimal type.
+
+Example:
+
+```csharp
+public decimal Price { get; set; }
+```
+
+Do not store prices as floating-point values.
+
+Display prices using appropriate currency formatting.
+
+The initial currency should be configurable rather than hard-coded throughout the application.
+
+---
+
+# 14. Responsive Design
+
+The website must be designed primarily for mobile users.
+
+Most restaurant visitors will probably access the website through a smartphone, potentially through a QR code on the table.
+
+The menu must therefore be extremely easy to read on a phone.
+
+Requirements:
+
+* responsive layout
+* large readable typography
+* clear prices
+* comfortable spacing
+* simple navigation
+* touch-friendly controls
+* fast loading
+* no unnecessary animations
+
+The website should still look good on:
+
+* mobile
+* tablet
+* desktop
+
+---
+
+# 15. QR Code Menu
+
+The menu should be accessible through a simple URL such as:
+
+```text
+https://restaurant-domain.com/menu
+```
+
+This URL will eventually be encoded into QR codes placed on restaurant tables.
+
+The URL must remain stable even when the menu changes.
+
+Changing the menu should never require generating a new QR code.
+
+---
+
+# 16. SEO
+
+Implement basic but proper SEO.
+
+Include:
+
+* meaningful page titles
+* meta descriptions
+* semantic HTML
+* Open Graph metadata
+* canonical URLs
+* sitemap
+* robots.txt
+* proper heading hierarchy
+* descriptive image alt text
+
+The restaurant should eventually use structured data such as:
+
+```text
+Restaurant
+```
+
+using Schema.org / JSON-LD.
+
+Potential structured information:
+
+* restaurant name
+* address
+* telephone
+* opening hours
+* cuisine type
+* price range
+* website
+* geographic coordinates
+
+Do not invent information that has not been provided by the restaurant.
+
+---
+
+# 17. Performance
+
+The website should be lightweight.
+
+Avoid unnecessary JavaScript.
+
+Prefer server-rendered Razor HTML.
+
+Images should be:
+
+* compressed
+* appropriately resized
+* served in modern formats where possible
+* lazy-loaded when appropriate
+
+The menu should load quickly even on mobile connections.
+
+---
+
+# 18. Admin UX
+
+The admin interface is specifically designed for the restaurant owners.
+
+Prioritize simplicity over technical flexibility.
+
+Avoid exposing:
+
+* database concepts
+* IDs
+* JSON
+* technical configuration
+* unnecessary settings
+
+Use clear labels such as:
+
+```text
+Nome
+Descrizione
+Prezzo
+Disponibile
+Categoria
+Ordine
+```
+
+If the admin interface is in Italian, all terminology should be natural Italian.
+
+The owners should be able to update a dish in less than a minute.
+
+---
+
+# 19. Database and EF Core
+
+Use EF Core migrations.
+
+Example development workflow:
+
+```text
+dotnet ef migrations add InitialCreate
+
+dotnet ef database update
+```
+
+The production SQLite database should not be recreated on every deployment.
+
+Migrations must preserve existing menu data.
+
+Seed only initial/default data where appropriate.
+
+Do not overwrite restaurant data during application startup.
+
+---
+
+# 20. Backup
+
+Because SQLite is a file-based database, implement a simple backup strategy.
+
+At minimum:
+
+```text
+restaurant.db
+restaurant.db.backup
+```
+
+Ideally production backups should be copied to a separate location periodically.
+
+The application should not assume that the SQLite file itself is the only backup.
+
+Consider an admin feature in the future:
+
+```text
+Admin
+  ↓
+Backup database
+  ↓
+Download backup
+```
+
+but this is not required for the MVP.
+
+---
+
+# 21. Deployment
+
+The application will be hosted on a server provided by a friend.
+
+The implementation should therefore avoid unnecessary infrastructure dependencies.
+
+Production should consist approximately of:
+
+```text
+Server
+│
+├── ASP.NET Core application
+│
+├── SQLite database
+│
+└── wwwroot
+      ├── css
+      ├── js
+      └── images
+```
+
+Configure:
+
+* production environment
+* HTTPS
+* logging
+* database path
+* application secrets through environment variables/configuration
+* appropriate file permissions
+
+Do not store production passwords or secrets in source control.
+
+---
+
+# 22. Configuration
+
+Use ASP.NET Core configuration.
+
+Example:
+
+```text
+appsettings.json
+appsettings.Production.json
+Environment Variables
+```
+
+Potential configuration:
+
+```text
+Database path
+Restaurant name
+Restaurant address
+Telephone
+Email
+Social media URLs
+Currency
+Google Maps URL
+```
+
+Avoid hard-coding these values throughout Razor pages.
+
+---
+
+# 23. Project Structure
+
+Use a clean but not overengineered structure.
+
+For example:
+
+```text
+Restaurant.Web/
+│
+├── Areas/
+│   └── Admin/
+│       ├── Pages/
+│       │   ├── Index.cshtml
+│       │   ├── Menu/
+│       │   ├── Categories/
+│       │   └── Dishes/
+│       │
+│       └── ...
+│
+├── Data/
+│   ├── RestaurantDbContext.cs
+│   └── Migrations/
+│
+├── Models/
+│   ├── Menu.cs
+│   ├── MenuCategory.cs
+│   └── Dish.cs
+│
+├── Services/
+│   ├── MenuService.cs
+│   └── ...
+│
+├── Pages/
+│   ├── Index.cshtml
+│   ├── Menu.cshtml
+│   ├── About.cshtml
+│   ├── Gallery.cshtml
+│   └── Contact.cshtml
+│
+├── wwwroot/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── Program.cs
+├── appsettings.json
+└── Restaurant.Web.csproj
+```
+
+Keep the architecture simple.
+
+Do not introduce unnecessary abstractions, repositories, CQRS, MediatR, microservices, or complicated domain architecture unless there is a concrete reason.
+
+---
+
+# 24. Design Direction
+
+The visual design should feel like a real restaurant website rather than an enterprise application.
+
+Prioritize:
+
+* high-quality food photography
+* elegant typography
+* strong visual hierarchy
+* whitespace
+* simple navigation
+* clear menu presentation
+* subtle animations only where useful
+
+The design should be customized after the restaurant's:
+
+* name
+* logo
+* colors
+* cuisine
+* location
+* photography
+
+are known.
+
+Do not use generic stock imagery if real restaurant photography is available.
+
+---
+
+# 25. Future Features
+
+The architecture should leave room for:
+
+* online reservation integration
+* Google Maps
+* Instagram integration
+* multiple languages
+* seasonal menus
+* special menus
+* daily specials
+* allergen information
+* dish photographs
+* wine list
+* drinks menu
+* private events
+* catering
+* gift cards
+* contact forms
+* analytics
+* Google Business integration
+
+Do not implement these prematurely.
+
+Build the MVP first.
+
+---
+
+# 26. MVP Priority
+
+The first version should focus on:
+
+### Public
+
+1. Home
+2. Menu
+3. About
+4. Contact
+5. Responsive design
+6. SEO basics
+7. QR-friendly menu URL
+
+### Admin
+
+1. Login
+2. Categories CRUD
+3. Dishes CRUD
+4. Reordering
+5. Availability toggle
+6. Price editing
+7. Description editing
+
+### Backend
+
+1. ASP.NET Core
+2. Razor
+3. EF Core
+4. SQLite
+5. Migrations
+6. Authentication
+7. Validation
+
+Everything else can come afterward.
+
+---
+
+# 27. Development Philosophy
+
+The most important principle is:
+
+**Keep the system boring, simple, reliable, and maintainable.**
+
+This is a small family restaurant website, not a SaaS platform.
+
+Do not introduce technologies merely because they are modern.
+
+Prefer:
+
+```text
+Simple
+        ↓
+Understandable
+        ↓
+Maintainable
+        ↓
+Reliable
+```
+
+over unnecessary complexity.
+
+The developer should be able to understand the entire application and database without needing external services.
+
+---
+
+# 28. Expected Result
+
+At the end of the initial implementation:
+
+A customer should be able to:
+
+```text
+Open website
+      ↓
+See restaurant
+      ↓
+Open menu
+      ↓
+Browse categories
+      ↓
+See dishes + descriptions + prices
+      ↓
+Find location/contact information
+```
+
+A restaurant owner should be able to:
+
+```text
+Open /admin
+      ↓
+Log in
+      ↓
+Open Menu
+      ↓
+Edit dish
+      ↓
+Change price
+      ↓
+Save
+      ↓
+Customer sees updated menu
+```
+
+No developer intervention should be required for normal menu changes.
+
+The system should be production-ready, responsive, secure, easy to deploy, and easy for the developer to maintain long-term.

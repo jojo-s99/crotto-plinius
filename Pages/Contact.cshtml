@@ -1,0 +1,99 @@
+@page
+@model ContactModel
+@inject IOptions<RestaurantSettings> RestaurantOptions
+@{
+    var settings = RestaurantOptions.Value;
+    ViewData["Title"] = "Contatti & Prenotazioni";
+    ViewData["MetaDescription"] = "Contatta Crotto Plinius a Torno (Como). Informazioni su orari, mappa per raggiungerci e prenotazione tavoli.";
+}
+
+<div class="bg-white border-bottom py-4 text-center">
+    <div class="container">
+        <h1 class="brand-font display-5 mb-2">Contatti & Prenotazioni</h1>
+        <p class="text-muted mb-0 small">Siamo a Torno, sulla sponda orientale del Lago di Como</p>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row g-5">
+        <div class="col-lg-6">
+            <h2 class="brand-font mb-4">Vieni a Trovarci</h2>
+
+            <div class="d-flex mb-4">
+                <div class="me-3">
+                    <span class="badge bg-danger p-3 rounded-circle">
+                        <i class="bi bi-geo-alt fs-5"></i>
+                    </span>
+                </div>
+                <div>
+                    <h5 class="fw-bold mb-1">Indirizzo</h5>
+                    <p class="text-muted mb-1">@settings.Address</p>
+                    <a href="@settings.GoogleMapsUrl" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-map me-1"></i>Apri su Google Maps
+                    </a>
+                </div>
+            </div>
+
+            <div class="d-flex mb-4">
+                <div class="me-3">
+                    <span class="badge bg-danger p-3 rounded-circle">
+                        <i class="bi bi-telephone fs-5"></i>
+                    </span>
+                </div>
+                <div>
+                    <h5 class="fw-bold mb-1">Prenotazione Telefonica</h5>
+                    <p class="text-muted mb-1">Per riservare il tuo tavolo chiama il:</p>
+                    <a href="tel:@settings.Phone.Replace(" ", "")" class="fs-5 fw-bold text-decoration-none text-danger">@settings.Phone</a>
+                </div>
+            </div>
+
+            <div class="d-flex mb-4">
+                <div class="me-3">
+                    <span class="badge bg-danger p-3 rounded-circle">
+                        <i class="bi bi-clock fs-5"></i>
+                    </span>
+                </div>
+                <div>
+                    <h5 class="fw-bold mb-1">Orari di Servizio</h5>
+                    <p class="text-muted mb-0">@settings.OpeningHours</p>
+                    <p class="small text-muted">Aperti anche nelle festività su prenotazione.</p>
+                </div>
+            </div>
+
+            <div class="d-flex">
+                <div class="me-3">
+                    <span class="badge bg-danger p-3 rounded-circle">
+                        <i class="bi bi-envelope fs-5"></i>
+                    </span>
+                </div>
+                <div>
+                    <h5 class="fw-bold mb-1">Email & Eventi Privati</h5>
+                    <p class="text-muted mb-0">Per banchetti, eventi e informazioni generali:</p>
+                    <a href="mailto:@settings.Email" class="text-decoration-none text-secondary fw-semibold">@settings.Email</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm p-4 bg-white h-100">
+                <h4 class="brand-font mb-3">Informazioni Utili</h4>
+                <div class="mb-3">
+                    <h6 class="fw-bold text-secondary"><i class="bi bi-p-square me-2 text-danger"></i>Parcheggio</h6>
+                    <p class="small text-muted">A disposizione dei clienti parcheggio riservato a 50 metri dall'ingresso pedonale.</p>
+                </div>
+                <div class="mb-3">
+                    <h6 class="fw-bold text-secondary"><i class="bi bi-water me-2 text-danger"></i>Arrivo in Battello</h6>
+                    <p class="small text-muted">Dall'imbarcadero della Navigazione Lago di Como di Torno, il crotto è raggiungibile in circa 7 minuti a piedi lungo l'antica mulattiera.</p>
+                </div>
+                <div class="mb-3">
+                    <h6 class="fw-bold text-secondary"><i class="bi bi-heart-pulse me-2 text-danger"></i>Esigenze Alimentari</h6>
+                    <p class="small text-muted">Disponiamo sempre di opzioni vegetariane e siamo attenti alle contaminazioni per celiachia ed intolleranze comunicate in anticipo.</p>
+                </div>
+                <div class="mt-auto p-3 bg-light rounded text-center">
+                    <p class="small mb-1 fw-bold">Desideri consultare i nostri prezzi prima della visita?</p>
+                    <a asp-page="/Menu" class="btn btn-crotto btn-sm">Vedi Menu e Prezzi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

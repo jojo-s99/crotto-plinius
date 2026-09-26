@@ -1,0 +1,57 @@
+@page
+@model CrottoPlinius.Pages.Admin.LoginModel
+@{
+    ViewData["Title"] = "Accesso Area Amministrativa";
+    Layout = "_Layout";
+}
+
+<div class="container py-5 my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-lg-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <i class="bi bi-shield-lock-fill fs-1 text-danger"></i>
+                        <h3 class="brand-font mt-2">Area Gestione</h3>
+                        <p class="text-muted small">Accesso riservato ai gestori di Crotto Plinius</p>
+                    </div>
+
+                    <form method="post" asp-route-returnurl="@Model.ReturnUrl">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2 small" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Username" class="form-label small fw-bold">Nome Utente</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <input asp-for="Input.Username" class="form-control" autocomplete="username" placeholder="admin" autofocus />
+                            </div>
+                            <span asp-validation-for="Input.Username" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Input.Password" class="form-label small fw-bold">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-key"></i></span>
+                                <input asp-for="Input.Password" class="form-control" autocomplete="current-password" placeholder="••••••••" />
+                            </div>
+                            <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-crotto w-100 py-2">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Accedi al Pannello
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a asp-page="/Index" class="text-muted small text-decoration-none">
+                    <i class="bi bi-arrow-left me-1"></i>Torna al sito pubblico
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
