@@ -1,0 +1,41 @@
+@page
+@model AboutModel
+@inject IOptions<RestaurantSettings> RestaurantOptions
+@{
+    var settings = RestaurantOptions.Value;
+    ViewData["Title"] = "La Nostra Storia";
+}
+
+<div class="bg-white border-bottom py-4 text-center">
+    <div class="container">
+        <h1 class="brand-font display-5 mb-2">Chi Siamo</h1>
+        <p class="text-muted mb-0 small">Custodi della tradizione culinaria lariana dal 1958</p>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+            <h2 class="brand-font mb-4">L'Anima del Crotto</h2>
+            <p>
+                Il termine <em>crotto</em> affonda le sue radici nella lingua lariana e indica una cavità naturale formatasi millenni fa tra le frane dei monti che circondano il Lago di Como. Dalle profondità di queste rocce spira costantemente il <strong>"sorèl"</strong>, una corrente d'aria termoregolata a circa 8°C in ogni stagione dell'anno.
+            </p>
+            <p>
+                In questa cantina naturale, la famiglia Plinius conserva da generazioni formaggi d'alpeggio, salumi della Valtellina e i migliori vini dell'arco alpino, offrendo ai propri ospiti un'esperienza conviviale autentica, lontana dai ritmi frenetici della città.
+            </p>
+            <h4 class="brand-font mt-4">La Filosofia in Cucina</h4>
+            <p class="text-muted">
+                Dalla polenta taragna cotta nel paiolo di rame sul camino a legna, al pesce persico pescato all'alba sulle acque antistanti Torno, ogni piatto è un omaggio alla terra di Lombardia e alla semplicità che sa farsi eccellenza.
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <div class="p-4 bg-white border rounded shadow-sm">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80" 
+                     alt="Tavolo rustico del crotto" 
+                     class="img-fluid rounded mb-3" />
+                <h5 class="brand-font mb-1">Cucina & Convivialità</h5>
+                <p class="small text-muted mb-0">Un'atmosfera calda e familiare, ideale per pranzi domenicali e cene tra amici.</p>
+            </div>
+        </div>
+    </div>
+</div>

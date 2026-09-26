@@ -1,0 +1,22 @@
+## .NET & Build Artifacts
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Database & Local State
+*.db
+*.db-shm
+*.db-wal
+*.db.backup
+
+## IDEs
+.vscode/
+.idea/
+.vs/
+
+## OS Files
+.DS_Store
+Thumbs.db
