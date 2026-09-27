@@ -3,7 +3,7 @@
 @inject IOptions<RestaurantSettings> RestaurantOptions
 @{
     var settings = RestaurantOptions.Value;
-    ViewData["Title"] = "Benvenuti";
+    ViewData["Title"] = "Ristorante e Pizzeria";
 }
 
 <!-- Schema.org Restaurant Structured Data -->
@@ -17,33 +17,69 @@
   "email": "@settings.Email",
   "address": {
     "@@type": "PostalAddress",
-    "streetAddress": "Via Regina 42",
-    "addressLocality": "Torno",
-    "addressRegion": "CO",
-    "postalCode": "22020",
+    "streetAddress": "Via Vela 62",
+    "addressLocality": "Induno Olona",
+    "addressRegion": "VA",
+    "postalCode": "21056",
     "addressCountry": "IT"
   },
-  "servesCuisine": "Lombarda, Lariana, Italiana",
+  "servesCuisine": "Lombarda , Italiana",
   "priceRange": "€€",
   "openingHours": "Tu-Su 12:00-14:30 19:00-22:30",
   "menu": "/menu"
 }
 </script>
 
-<!-- Hero Section -->
-<section class="hero-section">
-    <div class="container">
-        <span class="text-uppercase tracking-wider fw-bold text-warning mb-2 d-inline-block small">Autentica Cucina Lariana</span>
-        <h1 class="display-3 fw-bold">@settings.Name</h1>
-        <p class="lead">@settings.Tagline</p>
-        <p class="mb-4 text-white-50">Scavato nella roccia sulle rive del Lago di Como, dove il tempo si ferma e i sapori della tradizione rivivono intatti.</p>
-        <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <a asp-page="/Menu" class="btn btn-crotto btn-lg">
-                <i class="bi bi-book me-2"></i>Consulta il Menu
-            </a>
-            <a asp-page="/Contact" class="btn btn-crotto-outline btn-lg">
-                <i class="bi bi-geo-alt me-2"></i>Dove Siamo & Prenotazioni
-            </a>
+<!-- Hero Carousel Section -->
+<section class="hero-section position-relative overflow-hidden">
+    <!-- Carousel Bootstrap -->
+    <div id="heroCarousel" class="carousel slide carousel-fade position-absolute top-0 start-0 w-100 h-100" data-bs-ride="carousel" data-bs-interval="5000">
+        <!-- Indicatori (pallini in basso) -->
+        <div class="carousel-indicators z-3">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <!-- Immagini del Carousel -->
+        <div class="carousel-inner h-100">
+            <div class="carousel-item active h-100">
+                <img src="~/images/CANCELLO-X-SITO-01.jpg" class="d-block w-100 h-100 object-fit-cover" alt="">
+            </div>
+            <div class="carousel-item h-100">
+                <img src="~/images/entrata.jpg" class="d-block w-100 h-100 object-fit-cover" alt="">
+            </div>
+            <!-- <div class="carousel-item h-100">
+                <img src="~/images/DSC00733-X-SITO-1.jpg" class="d-block w-100 h-100 object-fit-cover" alt="">
+            </div> -->
+        </div>
+
+        <!-- Frecce Avanti/Indietro -->
+        <button class="carousel-control-prev z-3" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Precedente</span>
+        </button>
+        <button class="carousel-control-next z-3" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Successivo</span>
+        </button>
+    </div>
+
+    <!-- Overlay scuro + Contenuto (in sovrapposizione sopra le foto) -->
+    <div class="hero-overlay position-relative z-2 d-flex align-items-center h-100 py-5">
+        <div class="container text-center">
+            <!-- <span class="text-uppercase tracking-wider fw-bold text-warning mb-2 d-inline-block small">Simeoni</span> -->
+            <h1 class="display-3 fw-bold">@settings.Name</h1>
+            <p class="text-uppercase tracking-wider text-warning fw-bold">@settings.Tagline</p>
+            <p class="mb-4 text-white-50">Da oltre 30 anni accogliamo i nostri ospiti con la stessa passione di sempre. Vieni a riscoprire i sapori autentici della nostra pizzeria e ristorante</p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <a asp-page="/Menu" class="btn btn-crotto btn-lg">
+                    <i class="bi bi-book me-2"></i>Consulta il Menu
+                </a>
+                <a asp-page="/Contact" class="btn btn-crotto-outline btn-lg">
+                    <i class="bi bi-geo-alt me-2"></i>Dove Siamo & Prenotazioni
+                </a>
+            </div>
         </div>
     </div>
 </section>
@@ -51,32 +87,49 @@
 <!-- Features Intro -->
 <section class="py-5 bg-white">
     <div class="container text-center">
-        <div class="row g-4">
-            <div class="col-md-4">
+        <div class="row g-4 justify-content-center">
+            <!-- Colonna 1: Tradizione -->
+            <div class="col-md-3 col-sm-6">
                 <div class="p-3">
-                    <i class="bi bi-egg-fried fs-1 text-danger mb-3"></i>
-                    <h4 class="brand-font">Materie Prime Locali</h4>
-                    <p class="text-muted small">Pesce freschissimo del Lago di Como, formaggi degli alpeggi e farine macinate a pietra della Valtellina.</p>
+                    <i class="bi bi-award fs-1 text-danger mb-3"></i>
+                    <h4 class="brand-font">30 Anni di Tradizione</h4>
+                    <p class="text-muted small">Ristorante e pizzeria con oltre trent'anni di attività continua, guidati dalla passione per la buona cucina, cerchiamo di accogliere chiunque al meglio delle nostre possibilita'</p>
                 </div>
             </div>
-            <div class="col-md-4">
+
+
+ <!-- Colonna 4: Eventi -->
+            <div class="col-md-3 col-sm-6">
                 <div class="p-3">
-                    <i class="bi bi-house-door fs-1 text-danger mb-3"></i>
-                    <h4 class="brand-font">Il Crotto Storico</h4>
-                    <p class="text-muted small">Una cavità naturale ventilata dal "sorèl", brezza sotterranea costante che garantisce la temperatura ideale per vini e formaggi.</p>
+                    <i class="bi bi-heart-fill fs-1 text-danger mb-3"></i>
+                    <h4 class="brand-font">Eventi Speciali</h4>
+                    <p class="text-muted small">Matrimoni, battesimi, comunioni, cresime e per ogni occasione speciale: vasta scelta di menù personalizzati con attenzione a intolleranze e regimi alimentari specifici.</p>
                 </div>
             </div>
-            <div class="col-md-4">
+             <!-- Colonna 3: Bosco -->
+            <div class="col-md-3 col-sm-6">
                 <div class="p-3">
-                    <i class="bi bi-cup-straw fs-1 text-danger mb-3"></i>
-                    <h4 class="brand-font">Vini e Cantina</h4>
-                    <p class="text-muted small">Etichette selezionate dei terrazzamenti lariani, Valtellina Superiore DOCG e una cantina curata con passione.</p>
+                    <i class="bi bi-tree fs-1 text-danger mb-3"></i>
+                    <h4 class="brand-font">A Bordo Bosco</h4>
+                    <p class="text-muted small">Goditi il tuo pasto avvolto dalla natura: una splendida terrazza esterna per le giornate estive, Veranda esterna spaziosa e numerosi posti a sedere interni.</p>
                 </div>
             </div>
+
+           
+
+            <!-- Colonna 2: La Giazzèra -->
+            <div class="col-md-3 col-sm-6">
+                <div class="p-3">
+                    <i class="bi bi-snow fs-1 text-danger mb-3"></i>
+                    <h4 class="brand-font">La Giazzèra Storica</h4>
+                    <p class="text-muted small">Sotto il Crotto si cela una ghiacciaia di sasso profonda 4 metri. Un tempo alimentata dal ghiaccio della vicina Lagozza, usava un ingegnoso drenaggio per conservare cibi e rifornire il territorio.</p>
+                </div>
+            </div>
+
+           
         </div>
     </div>
 </section>
-
 <!-- Featured Dishes from Database -->
 @if (Model.FeaturedDishes.Any())
 {
@@ -121,14 +174,14 @@
     </section>
 }
 
-<!-- Info Callout -->
+<!-- Takeaway & Delivery Callout -->
 <section class="py-5 bg-white border-top">
     <div class="container">
         <div class="row align-items-center g-4">
             <div class="col-lg-6">
-                <h2 class="brand-font mb-3">La Tua Tavola sul Lago di Como</h2>
+                <h2 class="brand-font mb-3">Ordinazioni d'Asporto e Domicilio</h2>
                 <p class="text-muted mb-4">
-                    Che sia per un pranzo estivo all'ombra delle piante secolari o per una cena intima al calore del camino durante l'autunno, Crotto Plinius offre un rifugio di quiete e gusto autentico.
+                    Chiamate, ordinate quello che desiderate e passate a ritirare i vostri piatti preferiti senza alcun costo aggiuntivo. Gusta i sapori autentici della nostra pizzeria e ristorante comodo a casa tua.
                 </p>
                 <div class="d-flex gap-4">
                     <div>
@@ -136,17 +189,19 @@
                         <p class="small text-muted mb-0">@settings.OpeningHours</p>
                     </div>
                     <div>
-                        <h6 class="fw-bold mb-1"><i class="bi bi-telephone me-1 text-danger"></i> Telefono</h6>
-                        <p class="small text-muted mb-0">@settings.Phone</p>
+                        <h6 class="fw-bold mb-1"><i class="bi bi-telephone me-1 text-danger"></i> Ordina per Asporto</h6>
+                        <a class="small text-muted mb-0 text-decoration-none" href="tel:@settings.Phone">@settings.Phone</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 text-center">
                 <div class="p-4 border rounded bg-light">
-                    <i class="bi bi-qr-code fs-1 text-secondary mb-2"></i>
-                    <h5 class="brand-font">Menu Digitale a Tavola</h5>
-                    <p class="small text-muted mb-3">Sei già seduto al tavolo? Puoi visualizzare il nostro menu in tempo reale dal tuo smartphone.</p>
-                    <a asp-page="/Menu" class="btn btn-outline-secondary btn-sm">Apri Menu per Smartphone</a>
+                    <i class="bi bi-bag-check fs-1 text-danger mb-2"></i>
+                    <h5 class="brand-font">Consegna a Domicilio</h5>
+                    <p class="small text-muted mb-3">Preferisci ricevere il tuo ordine direttamente a casa? Ordina comodamente su Just Eat.</p>
+                    <a href="https://www.justeat.it/restaurants-ristorante-crotto-plinius-induno-olona/menu?shipping=pickup" target="_blank" rel="noopener noreferrer" class="btn btn-danger btn-sm">
+                        <i class="bi bi-box-seam me-1"></i> Ordina su Just Eat
+                    </a>
                 </div>
             </div>
         </div>

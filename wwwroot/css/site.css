@@ -49,13 +49,23 @@ h1, h2, h3, .brand-font {
   color: var(--primary);
 }
 
-/* Hero Section */
+/* Hero Section Container */
 .hero-section {
-  background: linear-gradient(180deg, rgba(30, 25, 20, 0.75), rgba(30, 25, 20, 0.85)), 
-              url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-  color: #ffffff;
-  padding: 6rem 1rem;
-  text-align: center;
+    position: relative;
+    min-height: 80vh; /* Regola l'altezza desiderata */
+    display: flex;
+    align-items: center;
+}
+
+/* Dark Overlay per migliorare la leggibilità del testo */
+.hero-overlay {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.55); /* Oscura lo sfondo */
+}
+
+/* Assicura che le immagini riempiano bene lo spazio senza distorcersi */
+.object-fit-cover {
+    object-fit: cover;
 }
 
 .hero-section h1 {

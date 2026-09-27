@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using CrottoPlinius.Data;
 using CrottoPlinius.Models;
 using CrottoPlinius.Services;
@@ -72,6 +73,33 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+var imagesDir = Path.Combine(app.Environment.ContentRootPath, "Images");
+if (Directory.Exists(imagesDir))
+{
+    var webRoot = app.Environment.WebRootPath ?? Path.Combine(app.Environment.ContentRootPath, "wwwroot");
+    var targetImagesDir = Path.Combine(webRoot, "images");
+    Directory.CreateDirectory(targetImagesDir);
+    foreach (var file in Directory.GetFiles(imagesDir))
+    {
+        var dest = Path.Combine(targetImagesDir, Path.GetFileName(file));
+        if (!File.Exists(dest) || File.GetLastWriteTimeUtc(file) > File.GetLastWriteTimeUtc(dest))
+        {
+            File.Copy(file, dest, true);
+        }
+    }
+
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(imagesDir),
+        RequestPath = "/Images"
+    });
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(imagesDir),
+        RequestPath = "/images"
+    });
+}
 
 app.UseRouting();
 
