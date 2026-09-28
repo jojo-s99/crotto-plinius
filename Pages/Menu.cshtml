@@ -1,5 +1,6 @@
 @page
 @model MenuModel
+@using Microsoft.Extensions.Options
 @inject IOptions<RestaurantSettings> RestaurantOptions
 @{
     var settings = RestaurantOptions.Value;
@@ -11,7 +12,7 @@
 <div class="bg-white border-bottom py-4 text-center">
     <div class="container">
         <h1 class="brand-font display-5 mb-2">Il Menu del Crotto</h1>
-        <p class="text-muted mb-0 small">la nostra pizza con impasto originale del crotto , menu e proposte stagionali potrebbero variare </p>
+        <p class="text-muted mb-0 small">la nostra pizza con impasto originale del crotto, menu e proposte stagionali potrebbero variare</p>
     </div>
 </div>
 
@@ -44,13 +45,23 @@
                 @foreach (var cat in Model.Categories)
                 {
                     <section id="cat-@cat.Id" class="pt-4 mb-5">
-                        <div class="d-flex align-items-baseline mb-2">
-                            <h2 class="menu-category-title h3">@cat.Name</h2>
+                        <!-- Category Header with Image -->
+                        <div class="d-flex align-items-center gap-3 mb-3 border-bottom pb-2">
+                            @if (!string.IsNullOrWhiteSpace(cat.ImageUrl))
+                            {
+                                <img src="@cat.ImageUrl" 
+                                     alt="@cat.Name" 
+                                     class="rounded shadow-sm object-fit-cover flex-shrink-0" 
+                                     style="width: 75px; height: 75px;" />
+                            }
+                            <div>
+                                <h2 class="menu-category-title h3 mb-0">@cat.Name</h2>
+                                @if (!string.IsNullOrWhiteSpace(cat.Description))
+                                {
+                                    <p class="text-muted small fst-italic mb-0 mt-1">@cat.Description</p>
+                                }
+                            </div>
                         </div>
-                        @if (!string.IsNullOrWhiteSpace(cat.Description))
-                        {
-                            <p class="text-muted small fst-italic mb-3">@cat.Description</p>
-                        }
 
                         <div class="row g-3">
                             @if (!cat.Dishes.Any())
@@ -98,8 +109,11 @@
         </div>
 
         <div class="text-center py-4 border-top mt-4 text-muted small">
-            <p class="mb-1"><i class="bi bi-shield-check me-1"></i>Coperto e servizio inclusi. Per intolleranze o allergie gravi vi invitiamo a informare il nostro personale di sala.</p>
-            <p class="mb-0">I piatti contrassegnati potrebbero contenere prodotti abbattuti in loco per garantire la massima freschezza.</p>
+            <p class="mb-1">
+                <i class="bi bi-shield-check me-1"></i>Coperto e servizio: 3€. 
+                <br>
+                Per intolleranze o allergie gravi vi invitiamo a informare il nostro personale di sala.
+            </p>
         </div>
     }
 </div>

@@ -8,6 +8,9 @@ using CrottoPlinius.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
+
 // Strongly-typed options
 builder.Services.Configure<RestaurantSettings>(
     builder.Configuration.GetSection("RestaurantSettings"));
@@ -52,8 +55,14 @@ builder.Services.AddAntiforgery(options =>
 {
     options.HeaderName = "X-CSRF-TOKEN";
 });
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.Lax;
+});
 
 var app = builder.Build();
+app.UseCookiePolicy(); 
 
 // Ensure DB and seed baseline data
 using (var scope = app.Services.CreateScope())

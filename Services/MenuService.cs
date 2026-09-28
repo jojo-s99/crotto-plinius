@@ -24,27 +24,27 @@ public class MenuService : IMenuService
     /// Fetches all active categories with available dishes for public rendering.
     /// Uses AsNoTracking and eager loading for optimal read performance.
     /// </summary>
-    public async Task<List<MenuCategory>> GetPublicMenuAsync()
-    {
-        return await _context.Categories
-            .AsNoTracking()
-            .Where(c => c.IsActive)
-            .OrderBy(c => c.SortOrder)
-            .Select(c => new MenuCategory
-            {
-                Id = c.Id,
-                Name = c.Name,
-                Description = c.Description,
-                SortOrder = c.SortOrder,
-                IsActive = c.IsActive,
-                Dishes = c.Dishes
-                    .Where(d => d.IsAvailable)
-                    .OrderBy(d => d.SortOrder)
-                    .ToList()
-            })
-            .ToListAsync();
-    }
-
+   public async Task<List<MenuCategory>> GetPublicMenuAsync()
+{
+    return await _context.Categories
+        .AsNoTracking()
+        .Where(c => c.IsActive)
+        .OrderBy(c => c.SortOrder)
+        .Select(c => new MenuCategory
+        {
+            Id = c.Id,
+            Name = c.Name,
+            Description = c.Description,
+            ImageUrl = c.ImageUrl, // <-- AGGIUNTO QUESTO
+            SortOrder = c.SortOrder,
+            IsActive = c.IsActive,
+            Dishes = c.Dishes
+                .Where(d => d.IsAvailable)
+                .OrderBy(d => d.SortOrder)
+                .ToList()
+        })
+        .ToListAsync();
+}
     /// <summary>
     /// Fetches all categories including inactive ones and all dishes for the Admin panel.
     /// </summary>

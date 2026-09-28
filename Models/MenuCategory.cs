@@ -21,6 +21,10 @@ public class MenuCategory
     [Display(Name = "Attiva nel Menu")]
     public bool IsActive { get; set; } = true;
 
+
+// Salva il percorso relativo, es. "/images/categories/abc.jpg"
+    public string? ImageUrl { get; set; }
+    
     // Navigation
     public ICollection<Dish> Dishes { get; set; } = new List<Dish>();
 }

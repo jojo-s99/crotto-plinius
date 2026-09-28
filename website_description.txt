@@ -170,7 +170,7 @@ Restaurant story / information.
 
 ---
 
-## Gallery
+## Giazzera
 
 Restaurant and food photographs.
 
@@ -759,7 +759,7 @@ Restaurant.Web/
 │   ├── Index.cshtml
 │   ├── Menu.cshtml
 │   ├── About.cshtml
-│   ├── Gallery.cshtml
+│   ├── Giazzera.cshtml
 │   └── Contact.cshtml
 │
 ├── wwwroot/

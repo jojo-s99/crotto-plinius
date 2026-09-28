@@ -1,0 +1,198 @@
+@page
+@model GiazzeraModel
+@inject IOptions<RestaurantSettings> RestaurantOptions
+@{
+    var settings = RestaurantOptions.Value;
+    ViewData["Title"] = "La Giazzèra del Crotto Plinius";
+}
+
+<!-- Hero / Title Section -->
+<div class="bg-white border-bottom py-5 text-center">
+    <div class="container">
+        <span class="badge bg-secondary text-uppercase mb-2 px-3 py-2 fs-6">Storia & Archeologia Culinaria</span>
+        <h1 class="brand-font display-4 mb-3">La Giazzèra del Crotto Plinius</h1>
+        <p class="text-muted lead mx-auto mb-0" style="max-width: 800px;">
+            L'antica struttura di conservazione del ghiaccio: ingegneria tradizionale, storia locale e clima naturale della Valceresio.
+        </p>
+    </div>
+</div>
+
+<div class="container py-5">
+    <!-- Highlights Grid -->
+    <div class="row g-4 mb-5 text-center">
+        <div class="col-6 col-md-3">
+            <div class="p-3 border rounded bg-light">
+                <div class="h3 fw-bold text-primary mb-1">~4 m</div>
+                <div class="small text-muted">Profondità struttura</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="p-3 border rounded bg-light">
+                <div class="h3 fw-bold text-primary mb-1">14 m</div>
+                <div class="small text-muted">Profondità pozzo drenaggio</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="p-3 border rounded bg-light">
+                <div class="h3 fw-bold text-primary mb-1">XVIII-XX</div>
+                <div class="small text-muted">Secoli di utilizzo in Lombardia</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="p-3 border rounded bg-light">
+                <div class="h3 fw-bold text-primary mb-1">Parco Lagozza</div>
+                <div class="small text-muted">Fonte storica del ghiaccio</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Narrative Section -->
+    <div class="row g-5 align-items-start mb-5">
+        <div class="col-lg-7">
+            <h2 class="h3 brand-font mb-4 border-bottom pb-2">Cos'era la Giazzèra?</h2>
+            <p class="text-secondary lead fs-6">
+                La ghiacciaia è un ambiente in cui veniva prodotto e/o immagazzinato il ghiaccio: l’antenata del nostro attuale frigorifero, arrivato solo intorno agli anni venti del secolo scorso a seguito dell’elettricità e dell’industrializzazione.
+            </p>
+            <p class="text-secondary">
+                Dalla fine del Settecento fino agli anni ’60 del Novecento, in Lombardia e soprattutto nei dintorni dei laghi, vennero costruite e utilizzate le ghiacciaie. Veri e propri spazi architettonici chiamati anche <strong>Glazèr</strong> o <strong>Giazzère</strong>, progettati per stiparvi in inverno il ghiaccio prelevato dalla superficie congelata del lago, elemento fondamentale durante il periodo più soleggiato per la conservazione del pesce e di altri alimenti.
+            </p>
+            <p class="text-secondary">
+                Lo stesso ambiente veniva chiamato <strong>Neviera</strong> o <strong>Nevera</strong> quando, oltre alla superficie solida del lago, veniva utilizzata la neve sommitale, subito costipata per far sì che si trasformasse in gelo. La temperatura interna era costantemente molto bassa, tanto che il sole estivo non riusciva a sciogliere la neve; in questo modo i pezzi ghiacciati, ben coperti col fieno, si conservavano per tutto l'anno.
+            </p>
+
+            <h3 class="h4 brand-font mt-5 mb-3">La Struttura del Crotto Plinius</h3>
+            <p class="text-secondary">
+                La Giazzèra del Crotto Plinius è una struttura interrata per la quasi totalità, costruita con pareti di sasso e profonda circa quattro metri. A Ovest della struttura vi è ancora la porticina originale dalla quale, un tempo, si accedeva tramite un cunicolo interrato per estrarre il ghiaccio nei mesi caldi. Una piccola finestra posta a livello della strada permettesse invece il carico del ghiaccio nel periodo invernale.
+            </p>
+            <p class="text-secondary">
+                All’interno della grotta raffreddata veniva sistemata una rudimentale scala in legno, facile da spostare, attraverso la quale si scendeva giungendo in profondità.
+            </p>
+
+            <div class="p-4 bg-light rounded border border-start border-4 border-primary my-4">
+                <h5 class="fw-bold mb-2">Ingeneria della conservazione e drenaggio</h5>
+                <p class="small text-muted mb-0">
+                    Si presume che l’intero vano venisse riempito fino al massimo consentito, e che poi il livello scendesse per lento scioglimento e naturale compattazione. Il ghiaccio scendeva mantenendo il contatto con le pareti, evitando la formazione di un’intercapedine dove l’aria ne avrebbe accelerato la liquefazione. Per evitare che le acque di scioglimento stagnanti velocizzassero il processo, la ghiacciaia disponeva sul fondo del pavimento di un sistema di raccolta e drenaggio che scaricava l’acqua in eccesso nel pozzo adiacente, profondo ben 14 metri.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <!-- Context Box / Local History -->
+            <div class="card border-0 shadow-sm p-4 bg-white mb-4">
+                <h4 class="h5 brand-font mb-3 text-primary">Posizione e Microclima</h4>
+                <p class="small text-muted">
+                    Alla radice di questa tipologia costruttiva vi è stato uno studio approfondito. Fondamentale è stato il ruolo svolto dalla scelta geografica: la locazione doveva necessariamente essere individuata osservando i punti dove la neve avrebbe resistito più a lungo, in una zona riparata dal sole e naturalmente raffrescata.
+                </p>
+                <hr class="text-muted" />
+                <h5 class="h6 fw-bold">Dal Lagozza alla Tavola</h5>
+                <p class="small text-muted">
+                    L'approvvigionamento avveniva a poche centinaia di metri nell’attuale <strong>Parco Lagozza</strong> ad Arcisate. Fino agli anni '80, il Lagozza era un laghetto alimentato da sorgenti sotterranee: d'inverno la superficie ghiacciata permettesse di pattinare e raccogliere i blocchi di ghiaccio.
+                </p>
+                <p class="small text-muted mb-0">
+                    Il ghiaccio immagazzinato serviva nei mesi estivi per la conservazione dei cibi presso il ristorante <strong>Crotto Plinius</strong>. La restante parte veniva divisa e venduta alle famiglie benestanti (per i primi armadietti refrigerati coibentati) o alle farmacie per uso medico.
+                </p>
+            </div>
+
+            <!-- Climate Today Note -->
+            <div class="card border-0 shadow-sm p-4 bg-light">
+                <h5 class="h6 fw-bold mb-2">Il Crotto Oggi</h5>
+                <p class="small text-muted mb-0">
+                    Ancora oggi la collina del Crotto Plinius rimane la zona più fredda durante l'inverno, con i prati dipinti dalla brina mattutina. Durante l’estate, la protezione degli alberi e la posizione all’imbocco della Valceresio garantiscono una piacevole temperatura e una costante ventilazione.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Giazzera Carousel Section -->
+    <div class="mb-5">
+        <h3 class="h4 brand-font text-center mb-4">Galleria Fotografica</h3>
+        <div id="giazzeraCarousel" class="carousel slide shadow-sm rounded overflow-hidden" data-bs-ride="carousel">
+            <!-- Indicatori / Pallini -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#giazzeraCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#giazzeraCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#giazzeraCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#giazzeraCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+
+            <!-- Contenuto Slide -->
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+
+
+                <div class="carousel-item active">
+                    <!-- Sostituisci la div placeholder con  quando hai le immagini -->
+                    <img src="~/images/INAUGURAZIONE-UTENSILI-GIAZZERA-01.jpg" class="d-block w-100 object-fit-cover" style="height: 450px;" alt="...">
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3 mb-3">
+                        <h5 class="fw-bold mb-1">Accesso Ovest</h5>
+                        <p class="small mb-0">La porticina originale e il cunicolo di accesso al vano interrato.</p>
+                    </div>
+                </div>
+<!-- Slide 4 -->
+                <div class="carousel-item">
+
+                                        <img src="~/images/DSC00706-X-SITO.jpg" class="d-block w-100 object-fit-cover" style="height: 450px;" alt="...">
+
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3 mb-3">
+                        <h5 class="fw-bold mb-1">Giazzera Ristrutturata</h5>
+                        <p class="small mb-0">ampio locale con vetro pavimentato che mostra la giazzera.</p>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+
+                
+                    <img src="~/images/INAUGURAZIONE-GIAZZERA-02.jpg" class="d-block w-100 object-fit-cover" style="height: 450px;" alt="...">
+
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3 mb-3">
+                        <h5 class="fw-bold mb-1">Mura in Sasso</h5>
+                        <p class="small mb-0">La struttura in sasso profonda 4 metri per mantenere il freddo.</p>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <img src="~/images/INAUGURAZIONE-GIAZZERA-03.jpg" class="d-block w-100 object-fit-cover" style="height: 450px;" alt="...">
+
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-3 mb-3">
+                        <h5 class="fw-bold mb-1">Finestra di Carico</h5>
+                        <p class="small mb-0">Apertura a livello stradale utilizzata d'inverno per caricare il ghiaccio.</p>
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <!-- Controlli Avanti / Indietro -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#giazzeraCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Precedente</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#giazzeraCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Successivo</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- YouTube Video Explanation Section -->
+    <div class="card border-0 shadow-sm overflow-hidden bg-white mt-5">
+        <div class="card-body p-4 p-md-5">
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <span class="badge bg-danger text-uppercase mb-2">Video Approfondimento</span>
+                    <h3 class="h4 brand-font mb-3">Guarda la spiegazione video</h3>
+                    <p class="text-muted small mb-0">
+                        Scopri tutti i dettagli storici ed esplora l'interno della Giazzèra del Crotto Plinius guidato dalla nostra spiegazione approfondita.
+                    </p>
+                </div>
+                <div class="col-lg-7">
+                    <!-- Responsive YouTube Embed Container -->
+                    <div class="ratio ratio-16x9 rounded shadow-sm overflow-hidden">
+                       <iframe width="560" height="315" src="https://www.youtube.com/embed/XzHEaHgLsto?si=zJNZMr_kQsJQClLF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if (showBanner)
+{
+    <div id="cookieConsent" class="alert alert-secondary alert-dismissible fade show fixed-bottom m-3 shadow-sm border-0 z-3" role="alert" style="max-width: 600px; z-index: 1080;">
+        <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
+            <div class="small text-muted">
+                Questo sito utilizza esclusivamente cookie tecnici necessari al corretto funzionamento. Per saperne di più consulta la nostra 
+                <a asp-page="/Privacy" class="alert-link text-decoration-underline">Informativa sulla Privacy</a>.
+            </div>
+            <button type="button" class="btn btn-dark btn-sm text-nowrap js-cookie-dismiss" data-cookie-string="@cookieString">
+                Ho capito
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var banner = document.querySelector("#cookieConsent");
+            if (!banner) return;
+
+            var dismissBtn = banner.querySelector(".js-cookie-dismiss");
+            if (dismissBtn) {
+                dismissBtn.addEventListener("click", function () {
+                    var cookieStr = this.getAttribute("data-cookie-string");
+                    if (cookieStr) {
+                        document.cookie = cookieStr;
+                    }
+                    if (window.bootstrap && bootstrap.Alert) {
+                        bootstrap.Alert.getOrCreateInstance(banner).close();
+                    } else {
+                        banner.classList.add("d-none");
+                    }
+                });
+            }
+        });
+    </script>
+}

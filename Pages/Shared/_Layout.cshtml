@@ -4,6 +4,7 @@
     var currentPath = Context.Request.Path.Value ?? "";
     var isAdmin = currentPath.StartsWith("/Admin", StringComparison.OrdinalIgnoreCase);
 }
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -93,7 +94,7 @@
                     <a class="nav-link @(currentPath.StartsWith("/About", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-page="/About">Chi Siamo</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(currentPath.StartsWith("/Gallery", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-page="/Gallery">Galleria</a>
+                    <a class="nav-link @(currentPath.StartsWith("/Giazzera", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-page="/Giazzera">Giazzera</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @(currentPath.StartsWith("/Contact", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-page="/Contact">Contatti</a>
@@ -111,7 +112,10 @@
     </header>
 
     <main role="main" class="flex-grow-1">
+
         @RenderBody()
+<partial name="_CookieConsentPartial" />   
+
     </main>
 
     <footer class="crotto-footer">
@@ -149,6 +153,7 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap small text-secondary">
                 <span>&copy; @DateTime.UtcNow.Year @settings.Name - Tutti i diritti riservati.</span>
                 <span>P.Iva: 01985470127 | REA: VA222020 | PEC: isimeoni@mypec.eu</span>
+                <a asp-page="/Privacy" class="text-warning small">Privacy & Cookie Policy</a>
             </div>
         </div>
     </footer>
@@ -159,3 +164,38 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+<!-- Inserisci nel tuo _Layout.cshtml -->
+<script>
+    function loadAnalytics() {
+        if (window.gtag_loaded) return;
+        window.gtag_loaded = true;
+        
+        // Esempio caricamento dinamico di Google Analytics
+        var script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-YOUR_TRACKING_ID';
+        script.async = true;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YOUR_TRACKING_ID');
+    }
+
+    // Controlla al caricamento della pagina
+    document.addEventListener("DOMContentLoaded", function () {
+        var prefs = JSON.parse(localStorage.getItem("user_cookie_preferences") || "{}");
+        if (prefs.analytics) {
+            loadAnalytics();
+        }
+    });
+
+    // Ascolta se l'utente aggiorna il consenso dal banner
+    window.addEventListener("cookieConsentUpdated", function (e) {
+        if (e.detail.analytics) {
+            loadAnalytics();
+        }
+    });
+</script>

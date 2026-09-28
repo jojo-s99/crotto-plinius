@@ -1,6 +1,13 @@
 /* Crotto Plinius - Custom Design System */
 :root {
-  --primary: #8b3a2b;       /* Terracotta / Rust */
+  /* 1. Colore primario principale */
+  --primary: #8b3a2b; 
+  --bs-primary: #8b3a2b; 
+  
+  /* 2. Solamente i valori numerici R, G, B (SENZA rgba) */
+  --bs-primary-rgb: 139, 58, 43;
+
+  /* 3. Colori secondari e custom */
   --primary-dark: #6e2c20;
   --secondary: #2c3539;     /* Slate / Stone */
   --accent: #c49a45;        /* Warm Gold / Brass */
@@ -9,8 +16,27 @@
   --text-dark: #22252a;
   --text-muted: #6c757d;
   --border-color: #e8e2d8;
+
+  /* 4. Sovrascrivi anche i link di Bootstrap con il tuo Terracotta */
+  --bs-link-color: var(--bs-primary);
+  --bs-link-hover-color: var(--primary-dark);
 }
 
+/* Forzatura utility Bootstrap per assicurare l'override */
+.text-primary {
+  color: var(--bs-primary) !important;
+}
+
+.btn-primary {
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+.btn-primary:hover, 
+.btn-primary:focus {
+  background-color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+}
 body {
   background-color: var(--bg-light);
   color: var(--text-dark);

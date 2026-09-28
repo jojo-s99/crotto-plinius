@@ -13,31 +13,41 @@
 
             <div class="card border-0 shadow-sm p-4">
                 <h3 class="brand-font mb-3">Crea Nuova Categoria</h3>
-                <form method="post">
-                    <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2 small"></div>
+                
+                <!-- IMPORTANTE: enctype="multipart/form-data" -->
+                <form method="post" enctype="multipart/form-data" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2 small" role="alert"></div>
 
                     <div class="mb-3">
                         <label asp-for="Category.Name" class="form-label fw-semibold"></label>
                         <input asp-for="Category.Name" class="form-control" placeholder="Es. Dolci della Tradizione" autofocus />
-                        <span asp-validation-for="Category.Name" class="text-danger small"></span>
+                        <span asp-validation-for="Category.Name" class="text-danger small d-block mt-1"></span>
                     </div>
 
                     <div class="mb-3">
                         <label asp-for="Category.Description" class="form-label fw-semibold"></label>
                         <input asp-for="Category.Description" class="form-control" placeholder="Es. Dessert fatti a mano ogni giorno" />
-                        <span asp-validation-for="Category.Description" class="text-danger small"></span>
+                        <span asp-validation-for="Category.Description" class="text-danger small d-block mt-1"></span>
+                    </div>
+
+                    <!-- CAMPO PER UPLOAD IMMAGINE -->
+                    <div class="mb-3">
+                        <label asp-for="ImageFile" class="form-label fw-semibold">Immagine Categoria</label>
+                        <input asp-for="ImageFile" type="file" class="form-control" accept="image/png, image/jpeg, image/webp" />
+                        <span class="form-text small text-muted">Carica un'immagine in formato JPG, PNG o WEBP.</span>
+                        <span asp-validation-for="ImageFile" class="text-danger small d-block mt-1"></span>
                     </div>
 
                     <div class="row mb-4">
                         <div class="col-md-6 mb-3 mb-md-0">
                             <label asp-for="Category.SortOrder" class="form-label fw-semibold"></label>
-                            <input asp-for="Category.SortOrder" class="form-control" type="number" />
-                            <span class="form-text small">Numero progressivo per decidere la posizione nel menu (1, 2, 3...)</span>
-                            <span asp-validation-for="Category.SortOrder" class="text-danger small"></span>
+                            <input asp-for="Category.SortOrder" class="form-control" type="number" min="0" step="1" />
+                            <span class="form-text small text-muted d-block mt-1">Numero progressivo per l'ordine nel menu</span>
+                            <span asp-validation-for="Category.SortOrder" class="text-danger small d-block mt-1"></span>
                         </div>
                         <div class="col-md-6 d-flex align-items-center pt-md-3">
                             <div class="form-check form-switch mt-2">
-                                <input class="form-check-input" type="checkbox" asp-for="Category.IsActive" id="isActiveSwitch">
+                                <input class="form-check-input" type="checkbox" asp-for="Category.IsActive" id="isActiveSwitch" />
                                 <label class="form-check-label fw-semibold" for="isActiveSwitch">Categoria Visibile nel Menu</label>
                             </div>
                         </div>

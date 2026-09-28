@@ -1,0 +1,62 @@
+@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Informativa sulla Privacy e Cookie";
+}
+
+<div class="container py-5" style="max-width: 800px;">
+    <h1 class="brand-font mb-4">Informativa sulla Privacy e sui Cookie</h1>
+    <p class="text-muted small mb-4">Ultimo aggiornamento: @DateTime.Now.ToString("dd/MM/yyyy")</p>
+
+    <section class="mb-5">
+        <h3 class="h5 fw-bold mb-3">1. Titolare del Trattamento</h3>
+        <p>
+            Il Titolare del trattamento dei dati è <strong>[Nome Ristorante / Ragione Sociale]</strong>, 
+            con sede in [Indirizzo Completo], Email: <a href="mailto:info@esempio.it">[Email di contatto]</a>.
+        </p>
+    </section>
+
+    <section class="mb-5">
+        <h3 class="h5 fw-bold mb-3">2. Tipologia di Dati Raccolti e Cookie Utilizzati</h3>
+        <p>
+            Questo sito web <strong>non utilizza cookie di profilazione o di tracciamento</strong> (come Google Analytics, Meta Pixel o simili) e non cede dati a soggetti terzi per scopi pubblicitari.
+        </p>
+        <p>
+            Vengono utilizzati esclusivamente <strong>cookie tecnici ed essenziali</strong>, necessari per consentire la corretta navigazione sul sito e per memorizzare la scelta dell'utente in merito all'informativa sui cookie.
+        </p>
+
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-sm small">
+                <thead class="table-light">
+                    <tr>
+                        <th>Nome Cookie</th>
+                        <th>Tipologia</th>
+                        <th>Scopo</th>
+                        <th>Scadenza</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>.AspNetCore.Consent</code></td>
+                        <td>Tecnico</td>
+                        <td>Memorizza la presa visione dell'informativa sui cookie.</td>
+                        <td>1 Anno</td>
+                    </tr>
+                    <tr>
+                        <td><code>.AspNetCore.Antiforgery</code></td>
+                        <td>Tecnico / Sicurezza</td>
+                        <td>Previene attacchi informatici di tipo Cross-Site Request Forgery (CSRF) durante l'invio dei moduli.</td>
+                        <td>Sessione</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <h3 class="h5 fw-bold mb-3">3. Diritti dell'Utente</h3>
+        <p>
+            Ai sensi del Regolamento Europeo (GDPR 2016/679), l'utente ha il diritto di chiedere al Titolare l'accesso ai propri dati personali, la rettifica o la cancellazione degli stessi, inviando una semplice richiesta all'indirizzo email indicato al punto 1.
+        </p>
+    </section>
+</div>
