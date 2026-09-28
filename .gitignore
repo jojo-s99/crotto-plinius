@@ -7,10 +7,10 @@ obj/
 *.sln.docstates
 
 ## Database & Local State
-*.db
-*.db-shm
-*.db-wal
-*.db.backup
+# *.db
+# *.db-shm
+# *.db-wal
+# *.db.backup
 
 ## IDEs
 .vscode/
