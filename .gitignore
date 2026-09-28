@@ -7,7 +7,7 @@ obj/
 *.sln.docstates
 
 ## Database & Local State
-*.db
+# *.db
 *.db-shm
 *.db-wal
 *.db.backup

@@ -21,6 +21,41 @@
   --bs-link-color: var(--bs-primary);
   --bs-link-hover-color: var(--primary-dark);
 }
+body {
+    position: relative;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    
+    /* Regola la dimensione da qui (es. 70vw = 70% della larghezza dello schermo) */
+    width: 70vw;
+    height: 70vh;
+    
+    /* Centra l'elemento perfettamente nel viewport */
+    transform: translate(-50%, -50%);
+    
+    background-image: url('../images/logo.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain; /* Mantiene le proporzioni originali dell'SVG */
+    
+    opacity: 0.25; /* Trasparenza filigrana (5%) - regola a piacere */
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Su schermi piccoli aumenta la larghezza relativa per mantenerlo ben visibile */
+@media (max-width: 768px) {
+    body::before {
+        width: 85vw;
+        height: 50vh;
+    }
+}
 
 /* Forzatura utility Bootstrap per assicurare l'override */
 .text-primary {
