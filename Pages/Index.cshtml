@@ -77,8 +77,113 @@
                     <i class="bi bi-book me-2"></i>Consulta il Menu
                 </a>
                 <a asp-page="/Contact" class="btn btn-crotto-outline btn-lg">
-                    <i class="bi bi-geo-alt me-2"></i>Dove Siamo & Prenotazioni
+                    <i class="bi bi-geo-alt me-2"></i>Contatti
                 </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Takeaway, Delivery & Events Callout -->
+<section class="py-5 bg-white border-top">
+    <div class="container">
+        <!-- Titolo Sezione -->
+        <div class="text-center mb-4">
+            <h2 class="brand-font">Prenotazioni, Asporto ed Eventi</h2>
+            <p class="text-muted small">Scegli come vivere la tua esperienza da noi</p>
+        </div>
+
+        <div class="row g-4">
+        <!-- Card 3: Orari & Contatti -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="p-4 border rounded bg-light text-center h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <i class="bi bi-clock-history fs-2 text-danger mb-2"></i>
+                        <h5 class="brand-font mb-2">Orari &amp; Info</h5>
+                        <div class="small text-muted mb-2">
+                            <div>@settings.OpeningHoursWeekday</div>
+                            <div>@settings.OpeningHoursHoliday</div>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="tel:@settings.Phone" class="btn btn-outline-danger btn-sm w-100">
+                            <i class="bi bi-telephone-fill me-1"></i> @settings.Phone
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 1: Prenotazione Tavoli -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="p-4 border rounded bg-light text-center h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <i class="bi bi-calendar-check fs-2 text-danger mb-2"></i>
+                        <h5 class="brand-font mb-2">Prenotazione Tavoli</h5>
+                        <p class="small text-muted mb-3">
+                            Chiamaci per riservare il tuo tavolo oppure lascia un messaggio in segreteria per conferma.
+                        </p>
+                    </div>
+                    <div>
+                        <a href="tel:@settings.Phone" class="btn btn-outline-danger btn-sm w-100">
+                            <i class="bi bi-telephone me-1"></i> Chiama ora
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Servizio Asporto -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="p-4 border rounded bg-light text-center h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <i class="bi bi-bag-check fs-2 text-danger mb-2"></i>
+                        <h5 class="brand-font mb-2">Servizio Asporto</h5>
+                        <p class="small text-muted mb-3">
+                            Ordina e passa a ritirare i tuoi piatti preferiti senza alcun costo aggiuntivo.
+                        </p>
+                    </div>
+                    <div>
+                        <a href="tel:@settings.Phone" class="btn btn-outline-danger btn-sm w-100">
+                            <i class="bi bi-telephone me-1"></i> Ordina d'Asporto
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Eventi & Banchetti -->
+            <div class="col-12 col-md-6 col-lg-3">
+                <div class="p-4 border rounded bg-light text-center h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <i class="bi bi-envelope-paper fs-2 text-danger mb-2"></i>
+                        <h5 class="brand-font mb-2">Eventi &amp; Banchetti</h5>
+                        <p class="small text-muted mb-3">
+                            Feste e cerimonie? Scrivici per un menu personalizzato per il tuo gruppo.
+                        </p>
+                    </div>
+                    <div>
+                        <a href="mailto:@settings.Email" class="btn btn-outline-danger btn-sm w-100 text-truncate">
+                            <i class="bi bi-envelope me-1"></i> Scrivici
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <!-- Card 5: Consegna a Domicilio (In coda e con minore rilevanza visiva su Desktop) -->
+            <div class="col-12">
+                <div class="p-3 border rounded bg-light">
+                    <div class="d-flex flex-column flex-md-row align-items-center justify-content-between text-center text-md-start gap-3">
+                        <div class="d-flex align-items-center gap-3 flex-column flex-md-row">
+                            <i class="bi bi-truck fs-3 text-danger"></i>
+                            <div>
+                                <h6 class="brand-font mb-0">Consegna a Domicilio</h6>
+                                <p class="small text-muted mb-0">Preferisci ricevere la cena a casa? Puoi ordinare direttamente via Just Eat.</p>
+                            </div>
+                        </div>
+                        <a href="https://www.justeat.it/restaurants-ristorante-crotto-plinius-induno-olona/menu?shipping=pickup" target="_blank" rel="noopener noreferrer" class="btn btn-danger btn-sm text-nowrap w-100 w-md-auto">
+                            <i class="bi bi-box-seam me-1"></i> Ordina su Just Eat
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -174,84 +279,3 @@
     </section>
 }
 
-<!-- Takeaway, Delivery & Events Callout -->
-<section class="py-5 bg-white border-top">
-    <div class="container">
-        <div class="row align-items-center g-4">
-            <!-- Left Column: Info & Details -->
-            <div class="col-lg-6">
-                <h2 class="brand-font mb-3">Prenotazioni, Asporto ed Eventi</h2>
-                
-                <!-- Sezione Prenotazione Tavoli -->
-                <div class="mb-3">
-                    <h6 class="fw-bold mb-1"><i class="bi bi-calendar-check me-1 text-danger"></i> Prenotazione Tavoli</h6>
-                    <p class="text-muted small mb-1">
-                        Chiamaci per riservare il tuo tavolo. È inoltre possibile richiedere un tavolo lasciando un messaggio in segreteria: <span class="text-danger">verrete ricontattati per la conferma della disponibilità.</span>
-                    </p>
-                </div>
-
-                <!-- Sezione Asporto -->
-                <div class="mb-3">
-                    <h6 class="fw-bold mb-1"><i class="bi bi-bag-check me-1 text-danger"></i> Servizio Asporto</h6>
-                    <p class="text-muted small mb-0">
-                        Chiamate, ordinate quello che desiderate e passate a ritirare i vostri piatti preferiti senza alcun costo aggiuntivo. Gusta i sapori autentici della nostra pizzeria e ristorante comodo a casa tua.
-                    </p>
-                </div>
-
-                <!-- Sezione Eventi e Banchetti -->
-                <div class="mb-4">
-                    <h6 class="fw-bold mb-1"><i class="bi bi-people me-1 text-danger"></i> Eventi e Banchetti</h6>
-                    <p class="text-muted small mb-0">
-                        Organizziamo feste, cerimonie e cene di gruppo. Per preventivi e informazioni personalizzate sui menu dedicati, <a href="mailto:@settings.Email" class="text-danger fw-bold text-decoration-none">inviaci una mail</a>.
-                    </p>
-                </div>
-
-                <!-- Hours & Contact (Full width per item on mobile) -->
-                <div class="row g-3">
-                    <div class="col-12 col-sm-6">
-                        <h6 class="fw-bold mb-1"><i class="bi bi-clock me-1 text-danger"></i> Orari</h6>
-                        <p class="small text-muted mb-0">@settings.OpeningHoursWeekday</p>
-                        <p class="small text-muted mb-0">@settings.OpeningHoursHoliday</p>
-                    </div>
-                    <div class="col-12 col-sm-6">
-                        <h6 class="fw-bold mb-1"><i class="bi bi-telephone me-1 text-danger"></i> Contatto</h6>
-                        <p class="small text-muted mb-1">Le chiamate verranno accettate durante e in prossimità degli orari lavorativi.</p>
-                        <a class="small fw-bold text-danger text-decoration-none" href="tel:@settings.Phone">
-                            <i class="bi bi-telephone-fill me-1"></i>@settings.Phone
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column: Action Cards -->
-            <div class="col-lg-6">
-                <div class="d-flex flex-column gap-3">
-                    
-                    <!-- Card Eventi e Banchetti (Email) -->
-                    <div class="p-4 border rounded bg-light text-center">
-                        <i class="bi bi-envelope-paper fs-2 text-danger mb-2"></i>
-                        <h5 class="brand-font mb-2">Eventi &amp; Banchetti</h5>
-                        <p class="small text-muted mb-3">Vuoi festeggiare un'occasione speciale da noi? Scrivici per definire il tuo menu personalizzato.</p>
-                        <a href="mailto:@settings.Email" class="btn btn-outline-danger btn-sm">
-                            <i class="bi bi-envelope me-1"></i> @settings.Email
-                        </a>
-                    </div>
-
-                    <!-- Card Consegna a Domicilio -->
-                    <div class="p-3 border rounded bg-light text-center">
-                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
-                            <div class="text-start">
-                                <h6 class="brand-font mb-0"><i class="bi bi-truck me-1 text-danger"></i> Consegna a Domicilio</h6>
-                                <p class="small text-muted mb-0">Ordina comodamente a casa tua su Just Eat.</p>
-                            </div>
-                            <a href="https://www.justeat.it/restaurants-ristorante-crotto-plinius-induno-olona/menu?shipping=pickup" target="_blank" rel="noopener noreferrer" class="btn btn-danger btn-sm">
-                                <i class="bi bi-box-seam me-1"></i> Ordina su Just Eat
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
