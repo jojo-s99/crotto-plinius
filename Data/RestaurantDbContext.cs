@@ -14,6 +14,8 @@ public class RestaurantDbContext : DbContext
     public DbSet<Dish> Dishes => Set<Dish>();
     public DbSet<Menu> Menus => Set<Menu>();
     public DbSet<AdminUser> AdminUsers => Set<AdminUser>();
+    public DbSet<SalesDay> SalesDays => Set<SalesDay>();
+    public DbSet<SalesItem> SalesItems => Set<SalesItem>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -58,6 +60,31 @@ public class RestaurantDbContext : DbContext
             entity.HasIndex(e => e.Username).IsUnique();
             entity.Property(e => e.Username).IsRequired().HasMaxLength(50);
             entity.Property(e => e.PasswordHash).IsRequired();
+        });
+
+        // Configurazione SalesDay: Date deve essere unica
+        modelBuilder.Entity<SalesDay>(entity =>
+        {
+            entity.HasIndex(s => s.Date).IsUnique();
+        });
+
+        // Configurazione SalesItem
+        modelBuilder.Entity<SalesItem>(entity =>
+        {
+            // Combinazione SalesDayId + DishId unica
+            entity.HasIndex(si => new { si.SalesDayId, si.DishId }).IsUnique();
+
+            // Relazione SalesItem -> SalesDay (Delete Cascade)
+            entity.HasOne(si => si.SalesDay)
+                  .WithMany(sd => sd.Items)
+                  .HasForeignKey(si => si.SalesDayId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+            // Relazione SalesItem -> Dish (Restrict Delete per tutelare lo storico)
+            entity.HasOne(si => si.Dish)
+                  .WithMany()
+                  .HasForeignKey(si => si.DishId)
+                  .OnDelete(DeleteBehavior.Restrict);
         });
     }
 }

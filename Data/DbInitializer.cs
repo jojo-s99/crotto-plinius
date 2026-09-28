@@ -533,6 +533,111 @@ public static class DbInitializer
                 }
             };
 
+            var pizzeriaClassica = new MenuCategory
+            {
+                Name = "Pizzeria Classica",
+                Description = "Pizze e calzoni classici della tradizione",
+                SortOrder = 8,
+                IsActive = true,
+                Dishes = new List<Dish>
+                {
+                    new() { Name = "Calzone Liscio", Description = "Pomodoro, Mozzarella", Price = 8.00m, SortOrder = 1, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Calzone Farcito", Description = "Pomodoro, Mozzarella, Prosciutto, Funghi, Olive, Carciofini", Price = 11.00m, SortOrder = 2, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Focaccia Liscia", Description = "", Price = 6.00m, SortOrder = 3, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Focaccia con Crudo", Description = "Sfoglie di Crudo all'uscita", Price = 9.00m, SortOrder = 4, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Marinara", Description = "Pomodoro, Aglio, Basilico", Price = 6.50m, SortOrder = 5, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Margherita", Description = "Pomodoro, Mozzarella", Price = 7.00m, SortOrder = 6, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza con Crudo", Description = "Pomodoro, Mozzarella, Crudo", Price = 10.00m, SortOrder = 7, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza alla Diavola", Description = "Pomodoro, Mozzarella, Salame Piccante, Peperoncino", Price = 10.00m, SortOrder = 8, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza con Prosciutto", Description = "Pomodoro, Mozzarella, Prosciutto Cotto", Price = 10.00m, SortOrder = 9, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza con Salame", Description = "Pomodoro, Mozzarella, Salame Dolce", Price = 10.00m, SortOrder = 10, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza con Speck", Description = "Pomodoro, Mozzarella, Speck all'uscita", Price = 10.00m, SortOrder = 11, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Bresaola e Grana", Description = "Pomodoro, Mozzarella, Bresaola, Grana a scaglie", Price = 11.00m, SortOrder = 12, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Capricciosa", Description = "Pomodoro, Mozzarella, Prosciutto, Funghi, Olive, Carciofini", Price = 10.00m, SortOrder = 13, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Carpaccio e Grana", Description = "Pomodoro, Mozzarella, Carpaccio di Magatello, Grana a scaglie", Price = 10.00m, SortOrder = 14, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Napoletana", Description = "Pomodoro, Mozzarella, Acciughe", Price = 9.50m, SortOrder = 15, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Prosciutto e Funghi", Description = "Pomodoro, Mozzarella, Prosciutto, Funghi Champignon", Price = 10.00m, SortOrder = 16, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Pugliese", Description = "Pomodoro, Mozzarella, Cipolle", Price = 8.50m, SortOrder = 17, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Quattro Formaggi", Description = "Pomodoro, Mozzarella, Gorgonzola, Emmenthal, Taleggio, Brie", Price = 11.00m, SortOrder = 18, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Quattro Stagioni", Description = "Pomodoro, Mozzarella, Prosciutto, Carciofini, Funghetti, Olive", Price = 11.00m, SortOrder = 19, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Frutti di Mare", Description = "Pomodoro, Mozzarella, Frutti di Mare", Price = 12.00m, SortOrder = 20, IsAvailable = true, IsFeatured = false }
+                }
+            };
+
+            var pizzeriaBenessere = new MenuCategory
+            {
+                Name = "Pizzeria Benessere",
+                Description = "Pizze bianche, leggere e con ingredienti selezionati",
+                SortOrder = 9,
+                IsActive = true,
+                Dishes = new List<Dish>
+                {
+                    new() { Name = "Pizza Montebianco", Description = "Mozzarella, Grana, Panna", Price = 9.00m, SortOrder = 21, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Colomba", Description = "Mozzarella, Ananas, Brie", Price = 9.50m, SortOrder = 22, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Selene", Description = "Mozzarella, Insalata, Carote, Zucchine, Pomodorini, Olive", Price = 10.00m, SortOrder = 23, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Favorita", Description = "Mozzarella, Salmone, Panna", Price = 10.00m, SortOrder = 24, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Anthea", Description = "Mozzarella, Gamberetti, Salsa Aurora", Price = 10.00m, SortOrder = 25, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Tonno e Cipolle", Description = "Mozzarella, Tonno, Cipolle", Price = 10.00m, SortOrder = 26, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Dafne", Description = "Mozzarella, Carpaccio di Spada, Rucola, Arancia", Price = 11.00m, SortOrder = 27, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Made in Italy", Description = "Pomodoro, Mozzarella, Pomodorini freschi, Rucola", Price = 10.00m, SortOrder = 28, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza e Porcini", Description = "Pomodoro, Mozzarella, Porcini trifolati", Price = 10.00m, SortOrder = 29, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Vegetariana", Description = "Pomodoro, Mozzarella, Melanzane, Peperoni grigliati, Zucchine affettate", Price = 10.00m, SortOrder = 30, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Zara", Description = "Pomodoro, Mozzarella, Scamorza, Melanzane grigliate, Pomodorini", Price = 10.00m, SortOrder = 31, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Zola e Mele", Description = "Pomodoro, Mozzarella, Gorgonzola, Mele", Price = 10.00m, SortOrder = 32, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Valbrembana", Description = "Pomodoro, Mozzarella, Taleggio, Pere", Price = 10.00m, SortOrder = 33, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza e Gamberetti", Description = "Pomodoro, Mozzarella, Gamberetti", Price = 11.00m, SortOrder = 34, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Mare e Monti", Description = "Pomodoro, Mozzarella, Funghi Porcini, Frutti di Mare", Price = 11.00m, SortOrder = 35, IsAvailable = true, IsFeatured = false }
+                }
+            };
+
+            var pizzeriaOriginali = new MenuCategory
+            {
+                Name = "Pizzeria Originali",
+                Description = "Abbinamenti sfiziosi e ricette originali della casa",
+                SortOrder = 10,
+                IsActive = true,
+                Dishes = new List<Dish>
+                {
+                    new() { Name = "Pizza Lele e Sam", Description = "Mozzarella, Patate bollite, Scamorza Affumicata, Speck, Rosmarino", Price = 11.00m, SortOrder = 36, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Nino", Description = "Mozzarella, Caprino, Radicchio, Salame Piccante all'uscita", Price = 10.00m, SortOrder = 37, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Magda", Description = "Mozzarella, Asparagi, Speck", Price = 11.00m, SortOrder = 38, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Silvana", Description = "Mozzarella, Zucchine grigliate, Pomodoro fresco, Prosciutto Cotto all'uscita", Price = 11.00m, SortOrder = 39, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza all'Inglese", Description = "Pomodoro, Mozzarella, Uovo, Pancetta", Price = 10.00m, SortOrder = 40, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Astrid", Description = "Pomodoro, Mozzarella, Speck, Gorgonzola", Price = 10.00m, SortOrder = 41, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Augusta", Description = "Pomodoro, Mozzarella, Porcini, Lardo, Grana", Price = 12.00m, SortOrder = 42, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Cherubino", Description = "Pomodoro, Mozzarella, Brie, Prosciutto Cotto", Price = 10.00m, SortOrder = 43, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Contadina", Description = "Pomodoro, Mozzarella, Speck, Fagioli, Salame Piccante", Price = 10.00m, SortOrder = 44, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Delizia", Description = "Pomodoro, Mozzarella, Zucchine grigliate, Crudo", Price = 11.00m, SortOrder = 45, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Demetra", Description = "Pomodoro, Mozzarella, Carpaccio di Carne, Sedano, Grana, Olio Tartufato", Price = 12.00m, SortOrder = 46, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Desiderio", Description = "Pomodoro, Mozzarella, Salumi assortiti", Price = 11.00m, SortOrder = 47, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Ethel", Description = "Pomodoro, Mozzarella, Prosciutto Cotto, Ananas", Price = 10.00m, SortOrder = 48, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Maurizio", Description = "Pomodoro, Mozzarella, Gorgonzola, Peperoni grigliati, Peperoncino Piccante", Price = 10.00m, SortOrder = 49, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Tenerife", Description = "Pomodoro, Mozzarella, Patatine Fritte", Price = 11.00m, SortOrder = 50, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Valdostana", Description = "Pomodoro, Mozzarella, Quattro Formaggi, Speck", Price = 11.00m, SortOrder = 51, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Cry 3 P", Description = "Pomodoro, Mozzarella, Prosciutto Cotto, Pesto, Pinoli", Price = 10.00m, SortOrder = 52, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Calzone 30 Anni di Crotto", Description = "Pomodoro, Mozzarella, Zola, Cipolle rosolate, Salame Piccante", Price = 11.00m, SortOrder = 53, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Jordan", Description = "Pomodoro, Mozzarella, Porcini, Speck, Brie", Price = 11.00m, SortOrder = 54, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Würstel", Description = "Pomodoro, Mozzarella, Würstel", Price = 9.50m, SortOrder = 55, IsAvailable = true, IsFeatured = false },
+                    new() { Name = "Pizza Würstel e Fritte", Description = "Pomodoro, Mozzarella, Würstel, Patatine Fritte", Price = 12.00m, SortOrder = 56, IsAvailable = true, IsFeatured = false }
+                }
+            };
+
+            var pizzeriaMensili = new MenuCategory
+            {
+                Name = "Pizzeria Mensili",
+                Description = "Specialità stagionali e proposte del mese",
+                SortOrder = 11,
+                IsActive = true,
+                Dishes = new List<Dish>
+                {
+                    new() { Name = "Cilento d'Estate", Description = "Pomodoro, Mozzarella, Salmone, Cipolline Borettane, Sesamo", Price = 12.00m, SortOrder = 57, IsAvailable = true, IsFeatured = true },
+                    new() { Name = "Giostra del Saracino", Description = "Pomodoro, Pesto di Zucchine, Ciliege di Mozzarella, Pomodori Secchi, Ricotta Stagionata", Price = 13.00m, SortOrder = 58, IsAvailable = true, IsFeatured = true },
+                    new() { Name = "Notte di San Lorenzo", Description = "Mozzarella, Porcini, Taleggio, Pancetta Affumicata", Price = 12.50m, SortOrder = 59, IsAvailable = true, IsFeatured = true },
+                    new() { Name = "La Volpe e l'Uva", Description = "Mozzarella, Uva, Noci, Grana a Scaglie, Rosmarino", Price = 11.50m, SortOrder = 60, IsAvailable = true, IsFeatured = true },
+                    new() { Name = "29 Settembre", Description = "Mozzarella, Pomodoro, Fichi Freschi, Crudo, Zola Piccante", Price = 13.00m, SortOrder = 61, IsAvailable = true, IsFeatured = true }
+                }
+            };
+
             context.Categories.AddRange(
                 antipastiClassici,
                 primiClassici,
@@ -540,7 +645,11 @@ public static class DbInitializer
                 formaggi,
                 insalatone,
                 contorni,
-                menuEstate
+                menuEstate,
+                pizzeriaClassica,
+                pizzeriaBenessere,
+                pizzeriaOriginali,
+                pizzeriaMensili
             );
             context.SaveChanges();
         }

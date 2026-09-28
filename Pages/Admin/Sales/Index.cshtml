@@ -1,0 +1,191 @@
+@page
+@model CrottoPlinius.Pages.Admin.Sales.IndexModel
+@{
+    ViewData["Title"] = "Gestione Vendite";
+    var currentMonthDate = new DateTime(Model.Year!.Value, Model.Month!.Value, 1);
+    var prevMonth = currentMonthDate.AddMonths(-1);
+    var nextMonth = currentMonthDate.AddMonths(1);
+    
+    int daysInMonth = DateTime.DaysInMonth(Model.Year.Value, Model.Month.Value);
+    int startDayOfWeek = (int)currentMonthDate.DayOfWeek;
+    // Correzione offset per iniziare da Lunedì (0) invece che Domenica
+    startDayOfWeek = startDayOfWeek == 0 ? 6 : startDayOfWeek - 1;
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h2 mb-0 brand-font">Gestione Vendite</h1>
+            <p class="text-muted small mb-0">Registra i piatti venduti giorno per giorno per le statistiche del ristorante</p>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle me-1"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="row g-4">
+        <!-- Calendario Mensile -->
+        <div class="col-lg-7">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                    <a asp-page="./Index" 
+                       asp-route-year="@prevMonth.Year" 
+                       asp-route-month="@prevMonth.Month" 
+                       asp-route-selectedDate="@Model.SelectedDate.ToString("yyyy-MM-dd")"
+                       class="btn btn-outline-secondary btn-sm">
+                        <i class="bi bi-chevron-left"></i>
+                    </a>
+
+                    <h5 class="mb-0 fw-bold">
+                        @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(currentMonthDate.ToString("MMMM yyyy"))
+                    </h5>
+
+                    <a asp-page="./Index" 
+                       asp-route-year="@nextMonth.Year" 
+                       asp-route-month="@nextMonth.Month" 
+                       asp-route-selectedDate="@Model.SelectedDate.ToString("yyyy-MM-dd")"
+                       class="btn btn-outline-secondary btn-sm">
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </div>
+
+                <div class="card-body p-3">
+                    <!-- Intestazione Giorni della Settimana -->
+                    <div class="d-flex text-center fw-bold text-muted small mb-2">
+                        <div style="width: 14.2857%;">Lun</div>
+                        <div style="width: 14.2857%;">Mar</div>
+                        <div style="width: 14.2857%;">Mer</div>
+                        <div style="width: 14.2857%;">Gio</div>
+                        <div style="width: 14.2857%;">Ven</div>
+                        <div style="width: 14.2857%;" class="text-primary">Sab</div>
+                        <div style="width: 14.2857%;" class="text-danger">Dom</div>
+                    </div>
+
+                    <!-- Griglia Calendario -->
+                    <div class="d-flex flex-wrap text-center">
+                        <!-- Spazi vuoti ad inizio mese -->
+                        @for (int i = 0; i < startDayOfWeek; i++)
+                        {
+                            <div style="width: 14.2857%; padding: 2px;">
+                                <div class="bg-light rounded opacity-25 h-100" style="min-height: 58px;"></div>
+                            </div>
+                        }
+
+                        <!-- Giorni del mese -->
+                        @foreach (var day in Model.MonthlyOverview)
+                        {
+                            var isSelected = day.Date.Date == Model.SelectedDate.Date;
+                            var btnClass = isSelected ? "btn-primary shadow-sm" : (day.HasData ? "btn-outline-success" : "btn-outline-light text-dark");
+
+                            <div style="width: 14.2857%; padding: 2px;">
+                                <a asp-page="./Index" 
+                                   asp-route-year="@Model.Year" 
+                                   asp-route-month="@Model.Month" 
+                                   asp-route-selectedDate="@day.Date.ToString("yyyy-MM-dd")"
+                                   class="btn @btnClass w-100 py-2 d-flex flex-column align-items-center justify-content-center position-relative"
+                                   style="min-height: 58px;">
+                                    <span class="fw-bold">@day.Date.Day</span>
+                                    @if (day.HasData)
+                                    {
+                                        <span class="badge @(isSelected ? "bg-white text-primary" : "bg-success text-white") mt-1" style="font-size: 0.65rem;">
+                                            @day.TotalDishesSold
+                                        </span>
+                                    }
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dettaglio Giornata & Inserimento -->
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-dark text-white py-3 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 h6">
+                        <i class="bi bi-calendar-event me-2"></i>Vendite — @Model.SelectedDate.ToString("dd MMMM yyyy")
+                    </h5>
+                    <span class="badge bg-primary fs-6">
+                        Totale: @Model.SelectedDayDetail.TotalQuantity
+                    </span>
+                </div>
+
+                <div class="card-body p-3">
+                    <!-- Tabella Piatti Venduti -->
+                    @if (!Model.SelectedDayDetail.Items.Any())
+                    {
+                        <div class="text-center py-4 text-muted">
+                            <i class="bi bi-inbox fs-2 d-block mb-2"></i>
+                            <p class="mb-0">Nessun piatto registrato per questa giornata.</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="table-responsive mb-3">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light small">
+                                    <tr>
+                                        <th>Piatto</th>
+                                        <th class="text-center" style="width: 100px;">Quantità</th>
+                                        <th class="text-end" style="width: 50px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.SelectedDayDetail.Items)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <div class="fw-bold fs-6">@item.DishName</div>
+                                                <div class="text-muted small">@item.CategoryName</div>
+                                            </td>
+                                            <td class="text-center fw-bold fs-6">
+                                                @item.Quantity
+                                            </td>
+                                            <td class="text-end">
+                                                <form method="post" asp-page-handler="RemoveItem" asp-route-itemId="@item.Id" asp-route-selectedDate="@Model.SelectedDate.ToString("yyyy-MM-dd")">
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm border-0" title="Rimuovi">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+
+                    <hr />
+
+                    <!-- Form Aggiungi / Modifica Piatto -->
+                    <h6 class="fw-bold mb-3"><i class="bi bi-plus-circle me-1"></i> Aggiungi o Modifica Piatto</h6>
+                    <form method="post" asp-page-handler="UpsertSalesItem" asp-route-selectedDate="@Model.SelectedDate.ToString("yyyy-MM-dd")">
+                        <div class="mb-3">
+                            <label asp-for="Input.DishId" class="form-label small fw-bold">Seleziona Piatto dal Menu</label>
+                            <select asp-for="Input.DishId" asp-items="Model.AvailableDishes" class="form-select">
+                                <option value="">-- Seleziona un piatto --</option>
+                            </select>
+                            <span asp-validation-for="Input.DishId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.Quantity" class="form-label small fw-bold">Quantità Venduta</label>
+                            <input asp-for="Input.Quantity" class="form-control" type="number" min="1" />
+                            <span asp-validation-for="Input.Quantity" class="text-danger small"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-check-lg me-1"></i> Salva Registrazione
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

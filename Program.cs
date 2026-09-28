@@ -26,7 +26,7 @@ builder.Services.AddScoped<IPasswordHasher<AdminUser>, PasswordHasher<AdminUser>
 
 // Application Services
 builder.Services.AddScoped<IMenuService, MenuService>();
-
+builder.Services.AddScoped<ISalesService, SalesService>();
 // Cookie Authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>

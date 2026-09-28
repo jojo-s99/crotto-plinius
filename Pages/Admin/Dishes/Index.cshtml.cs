@@ -3,9 +3,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CrottoPlinius.Data;
 using CrottoPlinius.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CrottoPlinius.Pages.Admin.Dishes;
-
+[Authorize]
 public class IndexModel : PageModel
 {
     private readonly RestaurantDbContext _context;
