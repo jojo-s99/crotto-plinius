@@ -48,7 +48,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarContent">
+   <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
             @if (isAdmin)
             {
@@ -83,7 +83,9 @@
             else
             {
                 <li class="nav-item">
-                    <a class="nav-link @(currentPath.Equals("/") || currentPath.Equals("/Index", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-page="/Index">Home</a>
+                    <a class="nav-link @(currentPath.Equals("/") || currentPath.Equals("/Index", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-page="/Index">
+                        <i class="bi bi-house me-1"></i>Home
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @(currentPath.StartsWith("/Menu", StringComparison.OrdinalIgnoreCase) ? "active fw-bold" : "fw-bold")" asp-page="/Menu">
@@ -91,17 +93,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(currentPath.StartsWith("/About", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-page="/About">Chi Siamo</a>
+                    <a class="nav-link @(currentPath.StartsWith("/About", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-page="/About">
+                        <i class="bi bi-info-circle me-1"></i>Chi Siamo
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @(currentPath.StartsWith("/Giazzera", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-page="/Giazzera">Giazzera</a>
+                    <a class="nav-link @(currentPath.StartsWith("/Giazzera", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-page="/Giazzera">
+                        <i class="bi bi-snow me-1"></i>Giazzera
+                    </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link @(currentPath.StartsWith("/Contact", StringComparison.OrdinalIgnoreCase) ? "active" : "")" asp-page="/Contact">Contatti</a>
-                </li>
+                
                 <li class="nav-item ms-lg-2">
                     <a class="btn btn-crotto btn-sm" asp-page="/Contact">
-                        <i class="bi bi-telephone-fill me-1"></i>Prenota
+                        <i class="bi bi-telephone-fill me-1"></i>Contatti
                     </a>
                 </li>
             }
