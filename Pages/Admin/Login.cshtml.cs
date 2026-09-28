@@ -42,16 +42,16 @@ public class LoginModel : PageModel
         public string Password { get; set; } = string.Empty;
     }
 
-    public void OnGet(string? returnUrl = null)
+   public IActionResult OnGet(string? returnUrl = null)
+{
+    if (User.Identity?.IsAuthenticated == true)
     {
-        if (User.Identity != null && User.Identity.IsAuthenticated)
-        {
-            Response.Redirect("/Admin/Index");
-            return;
-        }
-
-        ReturnUrl = returnUrl ?? "/Admin/Index";
+        return RedirectToPage("/Admin/Index");
     }
+
+    ReturnUrl = returnUrl ?? "/Admin/Index";
+    return Page();
+}
 
     public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
     {
@@ -62,9 +62,9 @@ public class LoginModel : PageModel
             return Page();
         }
 
-        var user = await _context.AdminUsers
-            .FirstOrDefaultAsync(u => u.Username.ToLower() == Input.Username.Trim().ToLower());
-
+       var trimmedUsername = Input.Username.Trim();
+var user = await _context.AdminUsers
+    .FirstOrDefaultAsync(u => u.Username == trimmedUsername);
         if (user == null)
         {
             ModelState.AddModelError(string.Empty, "Credenziali non valide.");
